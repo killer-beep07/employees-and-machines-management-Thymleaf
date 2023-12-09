@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Create</title>
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .text-danger {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <form action="#" th:action="@{/addemploye}" th:object="${employe}" method="post">
+        <div class="form-group">
+            <label for="name">Nom</label>
+            <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Nom">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="prenom">Prenom</label>
+            <input type="text" th:field="*{prenom}" class="form-control" id="prenom" placeholder="prenom">
+            <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="salaire">Salaire</label>
+            <input type="text" th:field="*{salaire}" class="form-control" id="salaire" placeholder="salaire">
+            <span th:if="${#fields.hasErrors('salaire')}" th:errors="*{salaire}" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Employe</button>
+    </form>
+</div>
+
+</body>
+</html>

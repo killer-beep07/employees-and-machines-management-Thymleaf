@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Create</title>
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .text-danger {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <form action="#" th:action="@{/addmachine}" th:object="${machine}" method="post">
+        <div class="form-group">
+            <label for="reference">Reference</label>
+            <input type="text" th:field="*{reference}" class="form-control" id="reference" placeholder="reference">
+            <span th:if="${#fields.hasErrors('reference')}" th:errors="*{reference}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="marque">marque</label>
+            <input type="text" th:field="*{marque}" class="form-control" id="marque" placeholder="marque">
+            <span th:if="${#fields.hasErrors('marque')}" th:errors="*{marque}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="dateAchat">Date Achat</label>
+            <input type="date" th:field="*{dateAchat}" class="form-control" id="dateAchat">
+            <span th:if="${#fields.hasErrors('dateAchat')}" th:errors="*{dateAchat}" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="prix">prix</label>
+            <input type="text" th:field="*{prix}" class="form-control" id="prix" placeholder="prix">
+            <span th:if="${#fields.hasErrors('prix')}" th:errors="*{prix}" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="employe">Employee</label>
+            <select th:field="*{employe}" class="form-control" id="employe">
+                <!-- Options will be dynamically added here -->
+            </select>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Add machine</button>
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Appeler la fonction pour remplir le ComboBox lors du chargement de la page
+        fillEmployeeComboBox();
+
+        function fillEmployeeComboBox() {
+            fetch('/employees')
+                .then(response => response.json())
+                .then(data => {
+                    // Sélectionner le ComboBox par son ID
+                    const employeComboBox = document.getElementById('employe');
+
+                    // Effacer les options existantes
+                    employeComboBox.innerHTML = '';
+
+                    // Ajouter chaque nom d'employé en tant qu'option
+                    data.forEach(employeName => {
+                        const option = document.createElement('option');
+                        option.value = employeName;
+                        option.text = employeName;
+                        employeComboBox.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching employees:', error));
+        }
+    });
+</script>
+
+</body>
+</html>

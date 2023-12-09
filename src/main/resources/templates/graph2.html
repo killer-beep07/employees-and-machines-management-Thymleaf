@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nombre de Machines par Année</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Include the Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #chart-container {
+            max-width: 800px;
+            width: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        #back-button {
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Utilisez une requête AJAX pour récupérer les données JSON depuis votre endpoint
+        fetch('/annee-achat')
+            .then(response => response.json())
+            .then(data => {
+                // Extractez les années et les nombres de machines à partir des données JSON
+                var years = Object.keys(data);
+                var machineCountsPerYear = Object.values(data);
+
+                // Créez le deuxième graphe
+                var ctx = document.getElementById("machinesPerYearChart").getContext("2d");
+                var myChart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: years,
+                        datasets: [
+                            {
+                                label: "Nombre de machines par année",
+                                data: machineCountsPerYear,
+                                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                                borderColor: "rgba(75, 192, 192, 1)",
+                                borderWidth: 1,
+                            },
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                });
+            })
+            .catch(error => console.error('Erreur lors de la récupération des données:', error));
+    });
+</script>
+<body>
+<div id="chart-container">
+    <div style="text-align: center; padding: 20px;">
+        <h1 style="margin-bottom: 10px;">Nombre de Machines par Année</h1>
+        <p>Visual representation of the number of machines per year</p>
+    </div>
+
+    <!-- Add a section canvas for the second graph -->
+    <canvas id="machinesPerYearChart"></canvas>
+
+    <button id="back-button" class="btn btn-primary" onclick="window.location.href='/index'">
+        <span class="oi oi-arrow-left" aria-hidden="true"></span> Back to Home
+    </button>
+</div>
+
+<!-- Include Bootstrap JS and Open Iconic Icons -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

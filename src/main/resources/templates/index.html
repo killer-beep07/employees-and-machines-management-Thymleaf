@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h1 class="display-4 text-primary">Home Page</h1>
+        <p class="lead">Welcome to the home page of the application.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a th:href="@{/machines}" class="btn btn-primary btn-lg btn-block mb-3">Machine Management</a>
+        </div>
+        <div class="col-md-6">
+            <a th:href="@{/employes}" class="btn btn-primary btn-lg btn-block mb-3">Employee Management</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a th:href="@{/filtrage}" class="btn btn-primary btn-lg btn-block mb-3">Filtering</a>
+        </div>
+        <div class="col-md-6">
+            <a th:href="@{/graph}" class="btn btn-primary btn-lg btn-block mb-3">A chart illustrating machines acquired by employee</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a th:href="@{/graph2}" class="btn btn-primary btn-lg btn-block mb-3 mt-3">A chart illustrating machines acquired by year</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js (optional, for Bootstrap's JavaScript components) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!-- graph.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Graph Page</title>
+        <!-- Include Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #chart-container {
+            max-width: 800px;
+            width: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            position: relative;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        #back-button {
+
+            top: 10px;    /* Ajustez la distance par rapport au haut selon vos besoins */
+            left: 10px;
+        }
+
+    </style>
+
+
+    <!-- Include the Chart.js library -->
+
+    <script src="script.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>// script.js
+    document.addEventListener("DOMContentLoaded", function () {
+        // Utilisez une requête AJAX pour récupérer les données JSON depuis votre endpoint
+        fetch('/Count')
+            .then(response => response.json())
+            .then(data => {
+                // Extractez les noms des employés et les nombres de machines à partir des données JSON
+                var employeeNames = data.map(function (entry) {
+                    return entry.employeeName;
+                });
+
+                var machineCounts = data.map(function (entry) {
+                    return entry.machineCount;
+                });
+
+                // Créez le graphe
+                var ctx = document.getElementById("employeeMachineChart").getContext("2d");
+                var myChart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: employeeNames,
+                        datasets: [
+                            {
+                                label: "Nombre de machines",
+                                data: machineCounts,
+                                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                                borderColor: "rgba(75, 192, 192, 1)",
+                                borderWidth: 1,
+                            },
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                });
+            })
+            .catch(error => console.error('Erreur lors de la récupération des données:', error));
+    });
+    </script>
+</head>
+<body>
+<div id="chart-container">
+    <div style="text-align: center; padding: 20px;">
+        <h1 style="margin-bottom: 10px;">Employee Machine Count Graph</h1>
+        <p>Visual representation of the number of machines per employee</p>
+    </div>
+
+    <!-- Add a section canvas for the graph -->
+    <canvas id="employeeMachineChart"></canvas>
+
+    <!-- Bootstrap button for redirection to index.html -->
+    <!-- Bootstrap button for redirection to index.html -->
+    <button id="back-button" class="btn btn-primary" onclick="window.location.href='/'">
+        <span class="oi oi-arrow-left" aria-hidden="true"></span> Back to Home
+    </button>
+</div>
+
+
+
+<!-- Include Bootstrap JS and Open Iconic Icons -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.rawgit.com/opensourceleg/feather/master/dist/feather.min.js">
+</body>
+</html>

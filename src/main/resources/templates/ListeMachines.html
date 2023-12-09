@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+    <title>Gestion machines</title>
+    <style>
+        body {
+            padding-top: 60px; /* Add padding for the fixed navbar */
+        }
+
+        .jumbotron {
+            background-color: #f8f9fa;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            border-radius: 0.3rem;
+        }
+
+        .btn-primary,
+        .btn-danger {
+            margin-right: 10px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Machine Management</a>
+    <!-- You can add more navigation links if needed -->
+</nav>
+
+<div class="container mt-4">
+
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Machine Management</h1>
+        <p class="lead">Efficiently manage your machines with our user-friendly interface.</p>
+    </div>
+
+    <div th:switch="${machines}">
+        <h2 th:case="null">No machines yet!</h2>
+        <div th:case="*">
+            <h2>Liste machines</h2>
+            <table class="table table-bordered" id="machinesTable">
+                <thead>
+                <tr>
+                    <th>Reference</th>
+                    <th>Marque</th>
+                    <th>Date Achat</th>
+                    <th>Prix</th>
+                    <th>Employe</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="machine : ${machines}">
+                    <td th:text="${machine.reference}"></td>
+                    <td th:text="${machine.marque}"></td>
+                    <td th:text="${machine.dateAchat}"></td>
+                    <td th:text="${machine.prix}"></td>
+                    <td th:text="${machine.employe?.name}"></td>
+                    <td><a th:href="@{/edit/{id}(id=${machine.id})}" class="btn btn-primary">Edit</a></td>
+                    <td><a th:href="@{/delete/{id}(id=${machine.id})}" onclick="return confirmDelete()" class="btn btn-danger">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            <a class="btn btn-primary" href="/signup-machine">Add a new machine</a>
+        </p>
+    </div>
+
+</div>
+
+
+
+<!-- Include Bootstrap and jQuery JavaScript libraries -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Add the Bootstrap table sorter script -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function(){
+        // Initialize the Bootstrap table sorter
+        $('#machinesTable').DataTable();
+    });
+
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this machine?");
+    }
+</script>
+
+</body>
+</html>
