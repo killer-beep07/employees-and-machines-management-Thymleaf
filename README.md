@@ -85,6 +85,8 @@ The project will be organized as follows:
 
 #### Delete machine
 <img width="960" alt="image" src="https://github.com/killer-beep07/ll/assets/130712993/97999963-214d-48f9-bd41-d47f6e1f6c97">
+<img width="960" alt="image" src="https://github.com/killer-beep07/employees-and-machines-management-Thymleaf/assets/130712993/58a5fc57-a90a-45a6-9e11-105288f13f37">
+
 
 
 ### Filtering
