@@ -87,6 +87,10 @@ The project will be organized as follows:
 <img width="960" alt="image" src="https://github.com/killer-beep07/ll/assets/130712993/97999963-214d-48f9-bd41-d47f6e1f6c97">
 <img width="960" alt="image" src="https://github.com/killer-beep07/employees-and-machines-management-Thymleaf/assets/130712993/58a5fc57-a90a-45a6-9e11-105288f13f37">
 
+### Sort By Date
+
+<img width="891" alt="image" src="https://github.com/killer-beep07/employees-and-machines-management-Thymleaf/assets/130712993/b053ed6b-e52d-47a6-90a8-20019c2d36a5">
+<img width="875" alt="image" src="https://github.com/killer-beep07/employees-and-machines-management-Thymleaf/assets/130712993/a47e4b67-3991-4b3b-b517-0a1fb15cfadc">
 
 
 ### Filtering
